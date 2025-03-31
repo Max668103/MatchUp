@@ -1,0 +1,61 @@
+﻿<Window x:Class="MatchUp.View.SelectMode"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MatchUp.View"
+        xmlns:vm="clr-namespace:MatchUp.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=vm:SelectModeVM}"
+        mc:Ignorable="d"
+        Title="SelectMode" Width="500" Height="800"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent">
+    
+    <Grid Background="#668a8a8a">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="354" Width="462">
+            <Grid.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Images/selectWindow.png" Stretch="UniformToFill" />
+            </Grid.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Time Limit:" Style="{StaticResource TextWindowInside}" VerticalAlignment="Center" Margin="20 60 0 0"/>
+                <ToggleButton Grid.Column="1" Name="TimeLimitToggle" Style="{StaticResource ToggleButtonStyle}" 
+                              HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="60 0 0 45"
+                              IsChecked="{Binding IsTimeLimitEnabled, Mode=TwoWay}"/>
+
+                <TextBlock Grid.Row="1" Text="Number of Cards:" Style="{StaticResource TextWindowInside}" Width="120" Margin="15 0 0 0"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" Name="CardCountComboBox" Width="80" Height="35" Style="{StaticResource ComboBoxFlatStyle}" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50 5 0 0" SelectedItem="{Binding SelectedCardCount}"
+                          ItemsSource="{Binding Options}">
+                </ComboBox>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Select Difficulty" Style="{StaticResource TextWindow}" Grid.ColumnSpan="2" Margin="0 17 20 0"/>
+                <Button Grid.Column="0" Command="{Binding CancelCommand}"
+                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                 Content="Cancel" Style="{StaticResource Button_Cancel}" VerticalAlignment="Bottom" Margin="0 0 10 30"/>
+                <Button Grid.Column="1" Command="{Binding ContinueCommand}" 
+                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                 Style="{StaticResource Button_Play}" Width="120" Content="Continue" VerticalAlignment="Bottom" Margin="0 0 30 30"/>
+                <Button Grid.Column="1" Command="{Binding CancelCommand}" 
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                        Style="{StaticResource Button_Cross}" Margin="159 26 0 0"/>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>
